@@ -31,18 +31,33 @@ def oat_drop(day):
 # Function for monday - Executes wtr_powerOn, water_d0, and oat_drop on monday
 def mon():
     print("Executed")
+    #sleeps for one day 
+    time.sleep(86400)
+
     
 def tue():
     print("Executed")
+    #sleeps for one day 
+    time.sleep(86400)
+
     
 def wed():
     print("Executed")
+    #sleeps for one day 
+    time.sleep(86400)
+
     
 def thur():
     print("Executed")
+    #sleeps for one day 
+    time.sleep(86400)
+
     
 def fri():
     print("Executed")
+    #sleeps for three days
+    time.sleep(259200)
+
     
     
 if __name__ == "__main__":
