@@ -7,13 +7,25 @@ def getDate():
 
 # Function that powers on the water
 def wtr_powerOn():
+    # Open Relay 6, delay 2 sec, close Relay 6
     print("Powering on")
-
+    
 
 def water_d0():
+    # Open Relay 7, delay 2 sec, close Relay 7
     print("Water D0")
 
-def oat_drop():
+def oat_drop(day):
+    # Add 1 to day so you get it correlated to D1, D2, D3, etc.
+    day += 1
+    
+    for x in range(1,5):
+        if x == day:            
+            # Open Relay for that day
+        
+    
+        
+   
     print("Dropping oats")
   
 # Function for monday - Executes wtr_powerOn, water_d0, and oat_drop on monday
@@ -34,7 +46,7 @@ def fri():
     
     
 if __name__ == "__main__":
-#sleeps for one day
+#sleeps for one day - this is a placeholder
     time.sleep(86400)
 
     if wDay == 0:
@@ -51,6 +63,6 @@ if __name__ == "__main__":
 
     wtr_powerOn()
     water_d0()
-    oat_drop()
+    oat_drop(wDay)
     # Wait 24 hours then repeat above
     
