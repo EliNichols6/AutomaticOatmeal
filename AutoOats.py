@@ -1,4 +1,12 @@
 import os,sys,random,time,datetime
+import RPi.GPIO as GPIO
+
+Relay = [5, 6, 13, 16, 19, 20, 21, 26]
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+for i in range(0,8):
+    GPIO.setup(Relay[i], GPIO.OUT)
 
 # Monday = 0, Sunday = 6
 def getDate():
@@ -7,94 +15,115 @@ def getTime():
     dTime = datetime.now()
 
 dt = datetime.now()
-
-# Function that powers on the water
-def wtr_powerOn():
-    # Open Relay 6, delay 2 sec, close Relay 6
-    print("Powering on")
-    
-
-def water_d0():
-    # Open Relay 7, delay 2 sec, close Relay 7
-    print("Water D0")
-
-def oat_drop(day):
-    # Add 1 to day so you get it correlated to D1, D2, D3, etc.
-    day += 1
-    
-    for x in range(1,5):
-        if x == day:            
-            # Open Relay for that day
-        
-    
-        
-   
-    print("Dropping oats")
   
-# Function for monday - Executes wtr_powerOn, water_d0, and oat_drop on monday
-def mon():
-    oat_drop(wDay)
-    time.sleep(6)
-    wtr_powerOn()
-    time.sleep(5)
-    water_d0()
-    time.sleep(120)
-    wtr_powerOn()
-    print("Executed")
-    #sleeps for one day 
-    time.sleep(86400)
 
-    
-def tue():
-    oat_drop(wDay)
-    time.sleep(6)
-    wtr_powerOn()
+def mon():
+    GPIO.output(Relay[0], GPIO.LOW)
     time.sleep(5)
-    water_d0()
+    GPIO.output(Relay[0], GPIO.HIGH)
+    time.sleep(6)
+    GPIO.output(Relay[5], GPIO.LOW)
+    time.sleep(2)
+    GPIO.output(Relay[5], GPIO.HIGH)
+    time.sleep(5)
+    GPIO.output(Relay[7], GPIO.LOW)
+    time.sleep(3)
+    GPIO.output(Relay[6], GPIO.LOW)
+    time.sleep(1.5)
+    GPIO.output(Relay[6], GPIO.HIGH)
     time.sleep(120)
-    wtr_powerOn()
-    print("Executed")
-    #sleeps for one day 
-    time.sleep(86400)
+    GPIO.output(Relay[7], GPIO.HIGH)
+    time.sleep(5)
+    GPIO.output(Relay[5], GPIO.LOW)
+    time.sleep(2)
+    GPIO.output(Relay[5], GPIO.HIGH)
+                    
+def tue():
+    GPIO.output(Relay[1], GPIO.LOW)
+    time.sleep(5)
+    GPIO.output(Relay[1], GPIO.HIGH)
+    time.sleep(6)
+    GPIO.output(Relay[5], GPIO.LOW)
+    time.sleep(2)
+    GPIO.output(Relay[5], GPIO.HIGH)
+    time.sleep(5)
+    GPIO.output(Relay[7], GPIO.LOW)
+    time.sleep(3)
+    GPIO.output(Relay[6], GPIO.LOW)
+    time.sleep(1.5)
+    GPIO.output(Relay[6], GPIO.HIGH)
+    time.sleep(120)
+    GPIO.output(Relay[7], GPIO.HIGH)
+    time.sleep(5)
+    GPIO.output(Relay[5], GPIO.LOW)
+    time.sleep(2)
+    GPIO.output(Relay[5], GPIO.HIGH)
 
     
 def wed():
-    oat_drop(wDay)
-    time.sleep(6)
-    wtr_powerOn()
+    GPIO.output(Relay[2], GPIO.LOW)
     time.sleep(5)
-    water_d0()
+    GPIO.output(Relay[2], GPIO.HIGH)
+    time.sleep(6)
+    GPIO.output(Relay[5], GPIO.LOW)
+    time.sleep(2)
+    GPIO.output(Relay[5], GPIO.HIGH)
+    time.sleep(5)
+    GPIO.output(Relay[7], GPIO.LOW)
+    time.sleep(3)
+    GPIO.output(Relay[6], GPIO.LOW)
+    time.sleep(1.5)
+    GPIO.output(Relay[6], GPIO.HIGH)
     time.sleep(120)
-    wtr_powerOn()
-    print("Executed")
-    #sleeps for one day 
-    time.sleep(86400)
+    GPIO.output(Relay[7], GPIO.HIGH)
+    time.sleep(5)
+    GPIO.output(Relay[5], GPIO.LOW)
+    time.sleep(2)
+    GPIO.output(Relay[5], GPIO.HIGH)
 
     
 def thur():
-    oat_drop(wDay)
-    time.sleep(6)
-    wtr_powerOn()
+    GPIO.output(Relay[3], GPIO.LOW)
     time.sleep(5)
-    water_d0()
+    GPIO.output(Relay[3], GPIO.HIGH)
+    time.sleep(6)
+    GPIO.output(Relay[5], GPIO.LOW)
+    time.sleep(2)
+    GPIO.output(Relay[5], GPIO.HIGH)
+    time.sleep(5)
+    GPIO.output(Relay[7], GPIO.LOW)
+    time.sleep(3)
+    GPIO.output(Relay[6], GPIO.LOW)
+    time.sleep(1.5)
+    GPIO.output(Relay[6], GPIO.HIGH)
     time.sleep(120)
-    wtr_powerOn()
-    print("Executed")
-    #sleeps for one day 
-    time.sleep(86400)
+    GPIO.output(Relay[7], GPIO.HIGH)
+    time.sleep(5)
+    GPIO.output(Relay[5], GPIO.LOW)
+    time.sleep(2)
+    GPIO.output(Relay[5], GPIO.HIGH)
 
     
 def fri():
-    oat_drop(wDay)
-    time.sleep(6)
-    wtr_powerOn()
+    GPIO.output(Relay[4], GPIO.LOW)
     time.sleep(5)
-    water_d0()
+    GPIO.output(Relay[4], GPIO.HIGH)
+    time.sleep(6)
+    GPIO.output(Relay[5], GPIO.LOW)
+    time.sleep(2)
+    GPIO.output(Relay[5], GPIO.HIGH)
+    time.sleep(5)
+    GPIO.output(Relay[7], GPIO.LOW)
+    time.sleep(3)
+    GPIO.output(Relay[6], GPIO.LOW)
+    time.sleep(1.5)
+    GPIO.output(Relay[6], GPIO.HIGH)
     time.sleep(120)
-    wtr_powerOn()
-    print("Executed")
-    #sleeps for three days
-    time.sleep(259200)
+    GPIO.output(Relay[7], GPIO.HIGH)
+    time.sleep(5)
+    GPIO.output(Relay[5], GPIO.LOW)
+    time.sleep(2)
+    GPIO.output(Relay[5], GPIO.HIGH)
 
     
     
@@ -116,10 +145,4 @@ if __name__ == "__main__":
             fri()      
 
    
-    
 
-    #wtr_powerOn()
-    #water_d0()
-    #oat_drop(wDay)
-    # Wait 24 hours then repeat above
-    
