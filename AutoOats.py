@@ -1,21 +1,12 @@
-import os,sys,random,time,datetime
+import os,sys,random,time,datetime, pytz
 import RPi.GPIO as GPIO
 
-Relay = [5, 6, 13, 16, 19, 20, 21, 26]
+def updateTime(): 
+    hour = datetime.datetime.now(pytz.timezone('US/Eastern')).hour
+    min = datetime.datetime.now(pytz.timezone('US/Eastern')).minute
 
-GPIO.setmode(GPIO.BCM)
-GPIO.setwarnings(False)
-for i in range(0,8):
-    GPIO.setup(Relay[i], GPIO.OUT)
-
-# Monday = 0, Sunday = 6
 def getDate():
-    wDay = dt.weekday()
-def getTime():
-    dTime = datetime.now()
-
-dt = datetime.now()
-  
+    wDay = dt.weekday()      
 
 def mon():
     GPIO.output(Relay[0], GPIO.LOW)
@@ -128,21 +119,29 @@ def fri():
     
     
 if __name__ == "__main__":
+    Relay = [5, 6, 13, 16, 19, 20, 21, 26]
 
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setwarnings(False)
+    for i in range(0,8):
+        GPIO.setup(Relay[i], GPIO.OUT)
+        
     a = True
     while a == True:
         getDate()
-        
-        if wDay == 0:
+        updateTime()        
+        if wDay == 0 and hour == 6 and min == 5:
             mon()
-        elif wDay == 1:
+            time.sleep(82800)
+        elif wDay == 1 and hour == 6 and min == 5:
             tue()
-        elif wDay == 2:
+            time.sleep(82800)
+        elif wDay == 2 and hour == 6 and min == 5:
             wed()
-        elif wDay == 3:
+            time.sleep(82800)
+        elif wDay == 3 and hour == 6 and min == 5:
             thur()
-        elif wDay == 4:            
-            fri()      
-
-   
-
+            time.sleep(82800)
+        elif wDay == 4 and hour == 6 and min == 5:            
+            fri()
+            time.sleep(82800) 
