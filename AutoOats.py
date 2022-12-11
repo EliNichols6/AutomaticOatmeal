@@ -129,6 +129,7 @@ if __name__ == "__main__":
     GPIO.setwarnings(False)
     for i in range(0,8):
         GPIO.setup(Relay[i], GPIO.OUT)
+        GPIO.output(Relay[i], GPIO.HIGh)
         
     a = True
     while a == True:
@@ -140,16 +141,16 @@ if __name__ == "__main__":
         wDay = dt.weekday()         
         if wDay == 0 and hour == 6 and minute == 5:
             mon()
-            time.sleep(85200)
+            time.sleep(86160)
         elif wDay == 1 and hour == 6 and minute == 5:
             tue()
-            time.sleep(85200)
+            time.sleep(86160)
         elif wDay == 2 and hour == 6 and minute == 5:
             wed()
-            time.sleep(85200)
+            time.sleep(86160)
         elif wDay == 3 and hour == 6 and minute == 5:
             thur()
-            time.sleep(85200)
+            time.sleep(86160)
         elif wDay == 4 and hour == 6 and minute == 5:            
             fri()
-            time.sleep(85200) 
+            time.sleep(258960) 
