@@ -140,16 +140,16 @@ if __name__ == "__main__":
         wDay = dt.weekday()         
         if wDay == 0 and hour == 6 and minute == 5:
             mon()
-            time.sleep(82800)
+            time.sleep(85200)
         elif wDay == 1 and hour == 6 and minute == 5:
             tue()
-            time.sleep(82800)
+            time.sleep(85200)
         elif wDay == 2 and hour == 6 and minute == 5:
             wed()
-            time.sleep(82800)
+            time.sleep(85200)
         elif wDay == 3 and hour == 6 and minute == 5:
             thur()
-            time.sleep(82800)
+            time.sleep(85200)
         elif wDay == 4 and hour == 6 and minute == 5:            
             fri()
-            time.sleep(82800) 
+            time.sleep(85200) 
