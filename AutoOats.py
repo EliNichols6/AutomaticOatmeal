@@ -1,12 +1,16 @@
-import os,sys,random,time,datetime, pytz
+import os,sys,random,time
 import RPi.GPIO as GPIO
+from datetime import datetime
+from pytz import timezone
 
-def updateTime(): 
+
+"""def updateTime(): 
     hour = datetime.datetime.now(pytz.timezone('US/Eastern')).hour
     min = datetime.datetime.now(pytz.timezone('US/Eastern')).minute
 
 def getDate():
-    wDay = dt.weekday()      
+    dt = datetime.now()
+    wDay = dt.weekday()"""
 
 def mon():
     GPIO.output(Relay[0], GPIO.LOW)
@@ -128,20 +132,24 @@ if __name__ == "__main__":
         
     a = True
     while a == True:
-        getDate()
-        updateTime()        
-        if wDay == 0 and hour == 6 and min == 5:
+        tz = timezone('EST')
+        datetime.now(tz) 
+        hour = datetime.now(tz).hour
+        minute = datetime.now(tz).minute
+        dt = datetime.now()
+        wDay = dt.weekday()         
+        if wDay == 0 and hour == 6 and minute == 5:
             mon()
             time.sleep(82800)
-        elif wDay == 1 and hour == 6 and min == 5:
+        elif wDay == 1 and hour == 6 and minute == 5:
             tue()
             time.sleep(82800)
-        elif wDay == 2 and hour == 6 and min == 5:
+        elif wDay == 2 and hour == 6 and minute == 5:
             wed()
             time.sleep(82800)
-        elif wDay == 3 and hour == 6 and min == 5:
+        elif wDay == 3 and hour == 6 and minute == 5:
             thur()
             time.sleep(82800)
-        elif wDay == 4 and hour == 6 and min == 5:            
+        elif wDay == 4 and hour == 6 and minute == 5:            
             fri()
             time.sleep(82800) 
