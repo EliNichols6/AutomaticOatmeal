@@ -3,11 +3,10 @@ import RPi.GPIO as GPIO
 from datetime import datetime
 from pytz import timezone
 
-# Function for Monday that executes Oats and Water functions - Same for T, W, TH, and F
-def mon():
-    GPIO.output(Relay[0], GPIO.LOW)
+def execute(weekday):
+    GPIO.output(Relay[weekday], GPIO.LOW)
     time.sleep(5)
-    GPIO.output(Relay[0], GPIO.HIGH)
+    GPIO.output(Relay[weekday], GPIO.HIGH)
     time.sleep(6)
     GPIO.output(Relay[5], GPIO.LOW)
     time.sleep(2)
@@ -23,95 +22,9 @@ def mon():
     time.sleep(5)
     GPIO.output(Relay[5], GPIO.LOW)
     time.sleep(2)
-    GPIO.output(Relay[5], GPIO.HIGH)
-                    
-def tue():
-    GPIO.output(Relay[1], GPIO.LOW)
-    time.sleep(5)
-    GPIO.output(Relay[1], GPIO.HIGH)
-    time.sleep(6)
-    GPIO.output(Relay[5], GPIO.LOW)
-    time.sleep(2)
-    GPIO.output(Relay[5], GPIO.HIGH)
-    time.sleep(5)
-    GPIO.output(Relay[7], GPIO.LOW)
-    time.sleep(3)
-    GPIO.output(Relay[6], GPIO.LOW)
-    time.sleep(1.5)
-    GPIO.output(Relay[6], GPIO.HIGH)
-    time.sleep(120)
-    GPIO.output(Relay[7], GPIO.HIGH)
-    time.sleep(5)
-    GPIO.output(Relay[5], GPIO.LOW)
-    time.sleep(2)
-    GPIO.output(Relay[5], GPIO.HIGH)
-
+    GPIO.output(Relay[5], GPIO.HIGH)  
     
-def wed():
-    GPIO.output(Relay[2], GPIO.LOW)
-    time.sleep(5)
-    GPIO.output(Relay[2], GPIO.HIGH)
-    time.sleep(6)
-    GPIO.output(Relay[5], GPIO.LOW)
-    time.sleep(2)
-    GPIO.output(Relay[5], GPIO.HIGH)
-    time.sleep(5)
-    GPIO.output(Relay[7], GPIO.LOW)
-    time.sleep(3)
-    GPIO.output(Relay[6], GPIO.LOW)
-    time.sleep(1.5)
-    GPIO.output(Relay[6], GPIO.HIGH)
-    time.sleep(120)
-    GPIO.output(Relay[7], GPIO.HIGH)
-    time.sleep(5)
-    GPIO.output(Relay[5], GPIO.LOW)
-    time.sleep(2)
-    GPIO.output(Relay[5], GPIO.HIGH)
 
-    
-def thur():
-    GPIO.output(Relay[3], GPIO.LOW)
-    time.sleep(5)
-    GPIO.output(Relay[3], GPIO.HIGH)
-    time.sleep(6)
-    GPIO.output(Relay[5], GPIO.LOW)
-    time.sleep(2)
-    GPIO.output(Relay[5], GPIO.HIGH)
-    time.sleep(5)
-    GPIO.output(Relay[7], GPIO.LOW)
-    time.sleep(3)
-    GPIO.output(Relay[6], GPIO.LOW)
-    time.sleep(1.5)
-    GPIO.output(Relay[6], GPIO.HIGH)
-    time.sleep(120)
-    GPIO.output(Relay[7], GPIO.HIGH)
-    time.sleep(5)
-    GPIO.output(Relay[5], GPIO.LOW)
-    time.sleep(2)
-    GPIO.output(Relay[5], GPIO.HIGH)
-
-    
-def fri():
-    GPIO.output(Relay[4], GPIO.LOW)
-    time.sleep(5)
-    GPIO.output(Relay[4], GPIO.HIGH)
-    time.sleep(6)
-    GPIO.output(Relay[5], GPIO.LOW)
-    time.sleep(2)
-    GPIO.output(Relay[5], GPIO.HIGH)
-    time.sleep(5)
-    GPIO.output(Relay[7], GPIO.LOW)
-    time.sleep(3)
-    GPIO.output(Relay[6], GPIO.LOW)
-    time.sleep(1.5)
-    GPIO.output(Relay[6], GPIO.HIGH)
-    time.sleep(120)
-    GPIO.output(Relay[7], GPIO.HIGH)
-    time.sleep(5)
-    GPIO.output(Relay[5], GPIO.LOW)
-    time.sleep(2)
-    GPIO.output(Relay[5], GPIO.HIGH)
-  
 if __name__ == "__main__":
     # Establishes Relays 1-8 (1 is 5, 2 is 6, 3 is 13, etc.)
     Relay = [5, 6, 13, 16, 19, 20, 21, 26]
@@ -133,17 +46,22 @@ if __name__ == "__main__":
         wDay = dt.weekday()
         # Checks Day, Time, and Minute to execute daily function
         if wDay == 0 and hour == 6 and minute == 5:
-            mon()
+            #mon()
+            execute(wDay)
             time.sleep(86160)
         elif wDay == 1 and hour == 6 and minute == 5:
-            tue()
+            #tue()
+            execute(wDay)
             time.sleep(86160)
         elif wDay == 2 and hour == 6 and minute == 5:
-            wed()
+            #wed()
+            execute(wDay)
             time.sleep(86160)
         elif wDay == 3 and hour == 6 and minute == 5:
-            thur()
+            #thur()
+            execute(wDay)
             time.sleep(86160)
         elif wDay == 4 and hour == 6 and minute == 5:            
-            fri()
+            #fri()
+            execute(wDay)
             time.sleep(258960) 
