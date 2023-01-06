@@ -1,31 +1,50 @@
+#!/usr/bin/python
+# -*- coding:UTF-8 -*-
+
 import os,sys,random,time
 import RPi.GPIO as GPIO
 from datetime import datetime
 from pytz import timezone
+import Temperature
 
+def getpid():
+    return os.getpid() 
 def execute(weekday):
     GPIO.output(Relay[weekday], GPIO.LOW)
-    time.sleep(5)
+    Temperature.read_temp(decimals = 1, sleeptime2 = 5)
+    #time.sleep(5)
     GPIO.output(Relay[weekday], GPIO.HIGH)
-    time.sleep(6)
+    Temperature.read_temp(decimals = 1, sleeptime2 = 6)
+    #time.sleep(6)
     GPIO.output(Relay[5], GPIO.LOW)
-    time.sleep(2)
+    Temperature.read_temp(decimals = 1, sleeptime2 = 2)
+    #time.sleep(2)
     GPIO.output(Relay[5], GPIO.HIGH)
-    time.sleep(5)
+    Temperature.read_temp(decimals = 1, sleeptime2 = 5)
+    #time.sleep(5)
     GPIO.output(Relay[7], GPIO.LOW)
-    time.sleep(3)
+    Temperature.read_temp(decimals = 1, sleeptime2 = 3)
+    #time.sleep(3)
     GPIO.output(Relay[6], GPIO.LOW)
-    time.sleep(1.5)
+    Temperature.read_temp(decimals = 1, sleeptime2 = 1.5)
+    #time.sleep(1.5)
     GPIO.output(Relay[6], GPIO.HIGH)
-    time.sleep(120)
+    Temperature.read_temp(decimals = 1, sleeptime2 = 120)
+    #time.sleep(120)
     GPIO.output(Relay[7], GPIO.HIGH)
-    time.sleep(5)
+    Temperature.read_temp(decimals = 1, sleeptime2 = 5)
+    #time.sleep(5)
     GPIO.output(Relay[5], GPIO.LOW)
-    time.sleep(2)
+    Temperature.read_temp(decimals = 1, sleeptime2 = 2)
+    #time.sleep(2)
     GPIO.output(Relay[5], GPIO.HIGH)  
     
 
 if __name__ == "__main__":
+    #global pid
+    #pid = os.getpid()
+    #value = temp.read_temp()
+    #print(value)
     # Establishes Relays 1-8 (1 is 5, 2 is 6, 3 is 13, etc.)
     Relay = [5, 6, 13, 16, 19, 20, 21, 26]
     # Set up Relays, Iterate through each relay to set them up and set output to high
@@ -57,7 +76,7 @@ if __name__ == "__main__":
             #wed()
             execute(wDay)
             time.sleep(86160)
-        elif wDay == 3 and hour == 6 and minute == 5:
+        elif wDay == 3 and hour == 22 and minute == 53:
             #thur()
             execute(wDay)
             time.sleep(86160)
