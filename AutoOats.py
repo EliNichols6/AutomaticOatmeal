@@ -6,14 +6,18 @@ import RPi.GPIO as GPIO
 from datetime import datetime
 from pytz import timezone
 import Temperature
+import Fan
+
 
 def getpid():
     return os.getpid() 
 def execute(weekday):
     GPIO.output(Relay[weekday], GPIO.LOW)
+    #GPIO.output(Relay[1], GPIO.LOW)
     Temperature.read_temp(decimals = 1, sleeptime2 = 5)
     #time.sleep(5)
     GPIO.output(Relay[weekday], GPIO.HIGH)
+    #GPIO.output(Relay[1], GPIO.HIGH)
     Temperature.read_temp(decimals = 1, sleeptime2 = 6)
     #time.sleep(6)
     GPIO.output(Relay[5], GPIO.LOW)
@@ -41,6 +45,7 @@ def execute(weekday):
     
 
 if __name__ == "__main__":
+    print("Test complete")
     #global pid
     #pid = os.getpid()
     #value = temp.read_temp()
@@ -72,11 +77,11 @@ if __name__ == "__main__":
             #tue()
             execute(wDay)
             time.sleep(86160)
-        elif wDay == 2 and hour == 6 and minute == 5:
+        elif wDay == 2 and hour == 5 and minute == 40:
             #wed()
             execute(wDay)
             time.sleep(86160)
-        elif wDay == 3 and hour == 22 and minute == 53:
+        elif wDay == 3 and hour == 6 and minute == 5:
             #thur()
             execute(wDay)
             time.sleep(86160)
