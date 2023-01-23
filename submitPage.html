@@ -20,11 +20,20 @@
 <body style="background-color:grey;">
 <h1 style="color: black;"><center><b>Automatic Oatmeal Time</b></h1>
 
-<br><center><form action="\b" method="post"><input style="font-family:verdana" type="button" class="button" value="Schedule"></body></form>
+
+        
+
+<center><form action="/b" method="post">
+    <label for="onoroff">Schedule Toggle:</label>
+    <select id="onoroff" name="onoroff">
+    <option value="On">On</option>
+    <option value="Off">Off</option>
+<br><input style="font-family:verdana" type="submit" class="button" value="Submit"></form>
 <br>
-
-
-    <label for="day">Choose a day:   </label>
+</center>
+<center>
+<form action="/a" method="post">
+    <label for="day">Day:   </label>
     <select id="day" name="day">
       <option value="Monday">Monday</option>
       <option value="Tuesday">Tuesday</option>
@@ -33,18 +42,18 @@
       <option value="Friday">Friday</option>
     </select>
 
-<form action="/a" method="post">
+
 <label>Hour:</label>
-    <input type="number" style="font-family:verdana" id="hour" name="hour">
+<input type="text" style="font-family:verdana" id="hour" name="hour">
 
 <label>Minute:</label>
-<input type="number" style="font-family:verdana" id="minute" name="minute">
+<input type="text" style="font-family:verdana" id="minute" name="minute">
+
+<input style="font-family:verdana" type="submit" class="button" value="Submit"></form></center>
 
 
-<br><center><input style="font-family:verdana" type="button" class="button" value="Submit"></form></body>
 
-
-<br><br><br><form action="/a" method="post"><center><input style="font-family:verdana" type="submit" class="button" value="Go to activate page"></body></form>
+<br><br><br><br><form action="/a" method="post"><center><input style="font-family:verdana" type="submit" class="button" value="Go to activate page"></form>
 
 
 </body>

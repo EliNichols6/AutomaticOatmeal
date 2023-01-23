@@ -29,4 +29,12 @@ def random():
         print(day, minute, hour)
         return render_template("activatePage.html")
 
+@app.route("/b", methods=["POST", "GET"])
+def random2():
+    if request.method == "POST":
+        schedule = request.form.get("onoroff")
+        print(schedule)
+        return render_template("submitPage.html")
+
+
     
