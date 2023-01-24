@@ -8,7 +8,7 @@ import AutoOats
 import RPi.GPIO as GPIO
 
 
-def read_temp(decimals = 1, sleeptime = 3):
+def read_temp(decimals = 1, sleeptime = 0):
     pid = AutoOats.getpid()
 
     """Reads the temperature from a 1-wire device"""
