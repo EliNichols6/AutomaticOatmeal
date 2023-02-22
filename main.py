@@ -1,8 +1,16 @@
-from flask import Flask, render_template, redirect, request, session
+from flask import Flask, json, render_template, redirect, request, session
 
 app = Flask(__name__)
 
-schedule_dictionary = {}
+def write_text(default_dictionary):
+    with open("myfile.json", 'w') as f: 
+        for key, value in default_dictionary.items(): 
+            f.write('%s:%s\n' % (key, value))
+
+default_dictionary = {'Monday':{"hour": 6, "minute": 5}, 'Tuesday':{"hour":6, "minute":5}, 'Wednesday':{"hour":6, "minute":5}, 'Thursday':{"hour":6, "minute":5}, 'Friday':{"hour":6, "minute":5}}
+write_text(default_dictionary)
+
+
 
 @app.route("/", methods=["POST", "GET"])
 def index():
@@ -28,15 +36,13 @@ def activatePage():
 
 @app.route("/a", methods=["POST", "GET"])
 def random():
-    global schedule_dictionary
+    global updated_dictionary
     if request.method == "POST":
-        schedule_dictionary["day"] = request.form.get("day")
-        schedule_dictionary["minute"] = request.form.get("minute")
-        schedule_dictionary["hour"] = request.form.get("hour")
-        day = request.form.get("day")
-        minute = request.form.get("minute")
         hour = request.form.get("hour")
-        print(day, minute, hour)
+        minute = request.form.get("minute")
+        default_dictionary[request.form.get("day")] = {"hour": hour, "minute": minute}
+        print(minute, hour)
+        write_text(default_dictionary)
         return render_template("activatePage.html")
 
 @app.route("/b", methods=["POST", "GET"])
@@ -48,8 +54,10 @@ def random2():
 
 @app.get('/schedule_data')
 def return_schedule_data():
-    global schedule_dictionary
-    return {"schedule_dictoinary":schedule_dictionary}
+    #read in text file
+    #update variable
+    global default_dictionary
+    return {"default_dictionary":default_dictionary}
 
 
     
