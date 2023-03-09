@@ -30,7 +30,7 @@ def index():
         passinput = request.form.get("password")
         print(userinput)
         print(passinput)
-        if userinput == "admin" and passinput == "admin":
+        if userinput == "admin" and passinput == "Tablechair!2022Auto":
             print(userinput)
             print(passinput)
             #Tablechair!2022Auto
