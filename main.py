@@ -68,6 +68,8 @@ def return_schedule_data():
     #read in text file
     #update variable
     global schedule_dictionary
+    with open("schedule.json", "r") as g:
+        schedule_dictionary = json.load(g)
     return {"schedule_dictionary":schedule_dictionary}
 
 
