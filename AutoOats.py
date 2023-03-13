@@ -3,11 +3,39 @@
 
 import os,sys,random,time
 import RPi.GPIO as GPIO
-from datetime import datetime
+from datetime import datetime, timedelta
 from pytz import timezone
 import Temperature
 import Fan
 
+def grabTimes():
+    global mHour 
+    global mMin
+    global tHour
+    global tMin
+    global wHour
+    global wMin
+    global thHour
+    global thMin
+    global fHour
+    global fMin
+    url = "http://192.168.100.150:81/schedule_data"
+    response = requests.get(url)
+    data_dict = json.loads(response.text)
+    #del data_dict["schedule_dictionary"]
+    #print(response.text)
+    #print(type(data_dict))
+    #print(data_dict["schedule_dictionary"])
+    mHour = data_dict["schedule_dictionary"]["Monday"]["hour"]
+    mMin = data_dict["schedule_dictionary"]["Monday"]["minute"]
+    tHour = data_dict["schedule_dictionary"]["Tuesday"]["hour"]
+    tMin = data_dict["schedule_dictionary"]["Tuesday"]["minute"]
+    wHour = data_dict["schedule_dictionary"]["Wednesday"]["hour"]
+    wMin = data_dict["schedule_dictionary"]["Wednesday"]["minute"]
+    thHour = data_dict["schedule_dictionary"]["Thursday"]["hour"]
+    thMin = data_dict["schedule_dictionary"]["Thursday"]["minute"]
+    fHour = data_dict["schedule_dictionary"]["Friday"]["hour"]
+    fMin = data_dict["schedule_dictionary"]["Friday"]["minute"]
 
 def getpid():
     return os.getpid() 
@@ -43,6 +71,24 @@ def execute(weekday):
     #time.sleep(2)
     GPIO.output(Relay[5], GPIO.HIGH)  
     
+def endDay1():
+    eastern = pytz.timezone('US/Eastern')
+    today = datetime.datetime.now(eastern)
+    end_of_day = today.replace(hour=23, minute=59, second=0, microsecond=0)
+    delta = (end_of_day - today).total_seconds()
+    print(today, end_of_day, delta)
+    time.sleep(delta)
+
+# Check Date and Time for EST
+def updateTime():
+    global hour
+    global minute
+    tz = timezone('EST')
+    datetime.now(tz) 
+    hour = datetime.now(tz).hour
+    minute = datetime.now(tz).minute
+    dt = datetime.now()
+    wDay = dt.weekday()
 
 if __name__ == "__main__":
     #global pid
@@ -60,31 +106,51 @@ if __name__ == "__main__":
         
     a = True
     while a == True:
-        # Check Date and Time for EST
-        tz = timezone('EST')
-        datetime.now(tz) 
-        hour = datetime.now(tz).hour
-        minute = datetime.now(tz).minute
-        dt = datetime.now()
-        wDay = dt.weekday()
+        updateTime()
+        grabTimes()
         # Checks Day, Time, and Minute to execute daily function
-        if wDay == 0 and hour == 22 and minute == 45:
-            #mon()
-            execute(wDay)
-            time.sleep(86160)
-        elif wDay == 1 and hour == 6 and minute == 5:
-            #tue()
-            execute(wDay)
-            time.sleep(86160)
-        elif wDay == 2 and hour == 5 and minute == 40:
-            #wed()
-            execute(wDay)
-            time.sleep(86160)
-        elif wDay == 3 and hour == 6 and minute == 5:
-            #thur()
-            execute(wDay)
-            time.sleep(86160)
-        elif wDay == 4 and hour == 6 and minute == 5:            
-            #fri()
-            execute(wDay)
-            time.sleep(258960) 
+        if wDay == 0:
+            if hour == mHour and minute == mMin:
+                #mon()
+                execute(wDay)
+                endDay1()
+            else:
+                time.sleep(30)
+                updateTime()
+                grabTimes()
+        elif wDay == 1:
+            if hour == tHour and minute == tMin:
+                #tue()
+                execute(wDay)
+                endDay1()
+            else:
+                time.sleep(30)
+                updateTime()
+                grabTimes()
+        elif wDay == 2:
+            if hour == wHour and minute == wMin:
+                #wed()
+                execute(wDay)
+                endDay1()
+            else:
+                time.sleep(30)
+                updateTime()
+                grabTimes()
+        elif wDay == 3:
+            if hour == thHour and minute == thMin:
+                #thur()
+                execute(wDay)
+                endDay1()
+            else:
+                time.sleep(30)
+                updateTime()
+                grabTimes()
+        elif wDay == 4:
+            if hour == fHour and minute == fMin:
+                #fri()
+                execute(wDay)
+                endDay1()
+            else:
+                time.sleep(30)
+                updateTime()
+                grabTimes()
