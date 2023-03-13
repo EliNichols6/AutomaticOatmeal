@@ -150,7 +150,10 @@ if __name__ == "__main__":
                 #fri()
                 execute(wDay)
                 endDay1()
+                time.sleep(172800)
             else:
                 time.sleep(30)
                 updateTime()
                 grabTimes()
+        else:
+            time.sleep(300)
