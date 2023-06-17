@@ -8,9 +8,6 @@ from pytz import timezone
 import Temperature
 import Fan
 
-
-
-
 def grabTimes():
     global mHour 
     global mMin
@@ -29,16 +26,16 @@ def grabTimes():
     #print(response.text)
     #print(type(data_dict))
     
-    mHour = data_dict["schedule_dictionary"]["Monday"]["hour"]
-    mMin = data_dict["schedule_dictionary"]["Monday"]["minute"]
-    tHour = data_dict["schedule_dictionary"]["Tuesday"]["hour"]
-    tMin = data_dict["schedule_dictionary"]["Tuesday"]["minute"]
-    wHour = data_dict["schedule_dictionary"]["Wednesday"]["hour"]
-    wMin = data_dict["schedule_dictionary"]["Wednesday"]["minute"]
-    thHour = data_dict["schedule_dictionary"]["Thursday"]["hour"]
-    thMin = data_dict["schedule_dictionary"]["Thursday"]["minute"]
-    fHour = data_dict["schedule_dictionary"]["Friday"]["hour"]
-    fMin = data_dict["schedule_dictionary"]["Friday"]["minute"]
+    mHour = int(data_dict["schedule_dictionary"]["Monday"]["hour"])
+    mMin = int(data_dict["schedule_dictionary"]["Monday"]["minute"])
+    tHour = int(data_dict["schedule_dictionary"]["Tuesday"]["hour"])
+    tMin = int(data_dict["schedule_dictionary"]["Tuesday"]["minute"])
+    wHour = int(data_dict["schedule_dictionary"]["Wednesday"]["hour"])
+    wMin = int(data_dict["schedule_dictionary"]["Wednesday"]["minute"])
+    thHour = int(data_dict["schedule_dictionary"]["Thursday"]["hour"])
+    thMin = int(data_dict["schedule_dictionary"]["Thursday"]["minute"])
+    fHour = int(data_dict["schedule_dictionary"]["Friday"]["hour"])
+    fMin = int(data_dict["schedule_dictionary"]["Friday"]["minute"])
 
 def getpid():
     return os.getpid() 
@@ -75,8 +72,8 @@ def execute(weekday):
     GPIO.output(Relay[5], GPIO.HIGH)  
     
 def endDay1():
-    eastern = pytz.timezone('US/Eastern')
-    today = datetime.datetime.now(eastern)
+    eastern = pytz.timezone('America/New_York')
+    today = datetime.now(eastern)
     end_of_day = today.replace(hour=23, minute=59, second=0, microsecond=0)
     delta = (end_of_day - today).total_seconds()
     print(today, end_of_day, delta)
@@ -87,8 +84,8 @@ def updateTime():
     global hour
     global minute
     global wDay
-    tz = timezone('EST')
-    datetime.now(tz) 
+    tz = timezone('America/New_York')
+    dt = datetime.now(tz) 
     hour = datetime.now(tz).hour
     minute = datetime.now(tz).minute
     dt = datetime.now()
