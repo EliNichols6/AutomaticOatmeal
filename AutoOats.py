@@ -1,12 +1,15 @@
 #!/usr/bin/python
 # -*- coding:UTF-8 -*-
 
-import os,sys,random,time
+import os,sys,random,time,requests,json
 import RPi.GPIO as GPIO
 from datetime import datetime, timedelta
 from pytz import timezone
 import Temperature
 import Fan
+
+
+
 
 def grabTimes():
     global mHour 
@@ -25,7 +28,7 @@ def grabTimes():
     #del data_dict["schedule_dictionary"]
     #print(response.text)
     #print(type(data_dict))
-    #print(data_dict["schedule_dictionary"])
+    
     mHour = data_dict["schedule_dictionary"]["Monday"]["hour"]
     mMin = data_dict["schedule_dictionary"]["Monday"]["minute"]
     tHour = data_dict["schedule_dictionary"]["Tuesday"]["hour"]
@@ -83,6 +86,7 @@ def endDay1():
 def updateTime():
     global hour
     global minute
+    global wDay
     tz = timezone('EST')
     datetime.now(tz) 
     hour = datetime.now(tz).hour
@@ -155,5 +159,3 @@ if __name__ == "__main__":
                 time.sleep(30)
                 updateTime()
                 grabTimes()
-        else:
-            time.sleep(300)
