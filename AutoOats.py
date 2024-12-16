@@ -19,7 +19,7 @@ def grabTimes():
     global thMin
     global fHour
     global fMin
-    url = "http://192.168.100.150:81/schedule_data"
+    url = "http://localhost:5000/schedule_data"
     response = requests.get(url)
     data_dict = json.loads(response.text)
     #del data_dict["schedule_dictionary"]
